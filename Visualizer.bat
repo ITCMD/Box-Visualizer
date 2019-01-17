@@ -1,13 +1,14 @@
 @echo off
-set Version=1.2
+set Version=1.3
+if "%~1"=="updated" goto done
 goto StartFile
 :update
 echo Installing Update . . .
-bitsadmin /transfer updatevisualizer /download /priority high https://github.com/ITCMD/Box-Visualizer/raw/master/Visualizer.bat "%~0" >nul
-
-
+start /Min bitsadmin /transfer updatevisualizer /download /priority high https://github.com/ITCMD/Box-Visualizer/raw/master/Visualizer.bat "%~0" ^&start "%~0" updated ^& exit
+exit
+:done
 echo Completed.
-echo this version: 1.2
+echo this version: 1.3
 echo Changelog:
 echo [1] fixed this LOL
 pause
@@ -110,7 +111,7 @@ set _Lines=17
 set _Col=50
 if %_Er%==1 goto new
 if %_Er%==2 goto ListSessions
-if %_Er%==5 goto updator
+if %_Er%==5 goto updator2
 exit /b
 
 
@@ -304,6 +305,16 @@ if not %errorlevel%==0 goto update
 echo You have the latest recommended version.
 pause
 goto menu
+
+:updator2
+cls
+echo Checking for update . . .
+bitsadmin /transfer visualizerupdatecheck /download /priority high https://github.com/ITCMD/Box-Visualizer/raw/master/Visualizer.version "%cd%\Version.Check" >nul
+find "[%version%]" "Version.Check" >nul
+if not %errorlevel%==0 goto update
+echo You have the latest recommended version.
+pause
+goto backfiles
 
 
 :export
