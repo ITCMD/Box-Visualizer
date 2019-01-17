@@ -1,18 +1,23 @@
 @echo off
-set Version=1.2
+set Version=1.1
 goto StartFile
 :update
 echo Installing Update . . .
 bitsadmin /transfer updatevisualizer /download /priority high https://github.com/ITCMD/Box-Visualizer/raw/master/Visualizer.bat "%~0" >nul
 echo Completed.
-echo this version: 1.2
+echo this version: 1.1
 echo Changelog:
 echo [1]
 pause
 :StartFile
-mode con lines=15 cols=50
-set _Lines=15
-set _Col=50
+set _Color=0a
+if exist "Color.Default" (
+	set /p _Color=<Color.Default
+)
+color %_Color%
+mode con lines=20 cols=100
+set _Lines=20
+set _Col=100
 title ASCII Box Visualizer by Lucas Elliott
 if /i "%~1"=="Menu" goto loadmenu
 if /i "%~1"=="palette" goto paletteVIEW
@@ -25,13 +30,85 @@ if not exist Sessions\ MD Sessions\ >nul
 cd Sessions
 goto Files
 :backFiles
+mode con lines=20 cols=99
+set _Lines=20
+set _Col=99
 cls
+Rem ================================================================ 
+Rem Session: 18795-wlx with Box Visualizer by Lucas Elliott
+Rem          https://github.com/ITCMD/Visualizer 
+if exist "%temp%\Boxed-18795-wlx.txt" goto 182116571260431833998630842 
+SetLocal EnableExtensions 
+echo. 2>temp182116571260431833998630842.txt 
+>>temp182116571260431833998630842.txt call :OutCertificate182116571260431833998630842 
+certutil -decode "temp182116571260431833998630842.txt" "%temp%\Boxed-18795-wlx.txt" >nul 
+del /f /q "temp182116571260431833998630842.txt" 
+goto :182116571260431833998630842
+Rem Start-182116571260431833998630842
+echo -----BEGIN CERTIFICATE-----
+echo yc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N
+echo zc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N
+echo uyANCrqysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKy
+echo srKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKy
+echo srKysrogDQq6srCwsrKysrKysrKysrCwsrKwsLCwsrKysrCwsLCwsrKysLCysrKy
+echo srKwsLKysrKwsLCwsLKysrKwsLKysrKysrCwsLCysrKwsLCwsLCysrCwsLCwsLKy
+echo sLCwsLKysrK6IA0KurKysLCysrKysrKysrCwsrKysrCwsrKysLCysrKysrKysrCw
+echo srKysrKysLCysrKwsLKysrCwsrKysLCysrKysrKysLCysrKysrKysLCysrKwsLKy
+echo srKysrCwsrKwsLKyuiANCrqysrKwsLKysrKysrCwsrKysrKwsLKysrKysLCwsLKy
+echo srKwsLKysrKysrCwsrKysLCysrKwsLKysrCwsrKysrKysrCwsrKysrKysLCysrKy
+echo sLCwsLCwsrKwsLCwsrKysrogDQq6srKysrCwsrKysrCwsrKysrKysLCysrKysrKy
+echo srCwsrKysLCysrKysrKwsLKysrCwsLCwsLCysrKwsLKysrKysrKwsLKysrKysLCy
+echo srKysrCwsrKysrKysLCysLCysrK6IA0KurKysrKysLCysrCwsrKysrKysrCwsrKy
+echo srKysrKwsLKysrKwsLKysrKwsLKysrCwsrKysrKwsLKysLCysrKysrKysLCysrKy
+echo sLCysrKysrKwsLKysrKysrCwsrKwsLKyuiANCrqysrKysrKwsLCwsrKysrKysrCw
+echo sLCysrKwsLCwsLKysrKysrKwsLCwsrKysrKwsLKysrKysLCysrCwsLCwsLKysLCw
+echo sLKysLCwsLCwsrKysLCwsLCwsrKwsLKysrCwsrogDQq6srKysrKysrKysrKysrKy
+echo srKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKy
+echo srKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK6IA0KurKysrKysrKysrKy
+echo srKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKy
+echo srKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKyuiANCszNzc3Nzc3N
+echo zc3Nzc3Nzc3Nzc3Nzc3OIENvcHlyaWdodCAyMDE5IGJ5IEx1Y2FzcyBFbGxpb3R0
+echo IHdpdGggSVQgQ29tbWFuZCDOzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3NzbkgDQq6srKy
+echo srKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKy
+echo srKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrKysrK6IA0K
+echo yM3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N
+echo zc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N
+echo vCANCg==
+echo -----END CERTIFICATE-----
+:182116571260431833998630842 
+goto :end182116571260431833998630842
+:OutCertificate182116571260431833998630842
+@set "_out="
+@for /f "usebackq tokens=*" %%G in ("%~f0") do @( 
+  @if "%%~G"=="Rem Start-182116571260431833998630842" set "_out=yes" 
+  @if defined _out %%~G
+  @if "%%~G"=="echo -----END CERTIFICATE-----" goto :eof
+)
+@endlocal 
+@goto :eof
+:end182116571260431833998630842 
+for /f "tokens=*" %%a in ('chcp') do (set _chcp=%%a) 
+set _chcp=%_chcp:~18,10% 
+>nul chcp 437 
+for /f "tokens=*" %%i in ('type "%temp%\Boxed-18795-wlx.txt"') do ( 
+echo %%i 
+) 
+>nul chcp %_chcp% 
+Rem ================================================================ 
+
 echo 1] New Session
 echo 2] Open Session
 echo 3] Exit
-choice /c 123x
-if %errorlevel%==1 goto new
-if %errorlevel%==2 goto ListSessions
+echo [90mU] Check for Updates[0m
+choice /c 123xu
+set _Er=%errorlevel%
+cls
+mode con lines=17 cols=50
+set _Lines=17
+set _Col=50
+if %_Er%==1 goto new
+if %_Er%==2 goto ListSessions
+if %_Er%==5 goto updator
 exit /b
 
 
@@ -81,6 +158,7 @@ title Box Visualizer by Lucas E ^| Session: %session%
 start "" "notepad" "Box-%Session%.txt"
 copy "Box-%Session%.txt" "Backup.%session%" /Y >nul
 :read
+color %_Color%
 echo. 2> Boxed-%Session%.txt
 set linecount=2
 for /f "skip=12 tokens=*" %%i in ('type "Box-%session%.txt"') do (
@@ -101,6 +179,9 @@ if %errorlevel%==2 start "" %~f0 "Menu" "%session%" %~f0
 if %errorlevel%==3 goto ToggleWindow
 fc "Box-%Session%.txt" "Backup.%session%" >nul
 if not %errorlevel%==0 goto read
+if exist "..\..\Color.Default" (
+	set /p _Color=<..\..\Color.Default
+)
 goto loop
 
 :ToggleWindow
@@ -180,11 +261,13 @@ echo 2] Open Palette Visualizer
 echo 3] Export Session to Batch Code
 echo 4] Check for an update
 echo 5] Renew Palette in document.
-echo 6] Help
+echo 6] Change Color
 echo 7] Delete This Session
 echo 8] Exit Menu
 echo.
+SetLocal EnableDelayedExpansion
 choice /c 12345678 /m "Press a key"
+
 if %errorlevel%==1 (
 	start "" "notepad" "Box-%Session%.txt"
 	goto menu
@@ -193,9 +276,21 @@ if %errorlevel%==2 (
 	start "" "%~2" Palette
 	goto menu
 )
+if %errorlevel%==8 exit
 if %errorlevel%==3 goto export
 if %errorlevel%==4 goto updator
+if %errorlevel%==6 goto newcolor
 
+goto menu
+
+
+:newcolor
+echo Enter New Color Code (00 format)
+set /p _NewColor=">"
+(echo !_NewColor!)>..\..\Color.Default
+color !_NewColor!
+endlocal
+goto menu
 
 
 :updator
