@@ -1,10 +1,13 @@
 @echo off
-set Version=1.1
+set Version=1.2
 goto StartFile
 :update
-echo Downloading Update . . .
-
 echo Installing Update . . .
+bitsadmin /transfer updatevisualizer /download /priority high https://github.com/ITCMD/Box-Visualizer/raw/master/Visualizer.bat "%~0" >nul
+echo Completed.
+echo this version: 1.2
+echo Changelog:
+echo [1]
 :StartFile
 mode con lines=15 cols=50
 set _Lines=15
@@ -190,8 +193,19 @@ if %errorlevel%==2 (
 	goto menu
 )
 if %errorlevel%==3 goto export
-if %errorlevel%==4 goto update
+if %errorlevel%==4 goto updator
 
+
+
+:updator
+cls
+echo Checking for update . . .
+bitsadmin /transfer visualizerupdatecheck /download /priority high https://github.com/ITCMD/Box-Visualizer/raw/master/Visualizer.version "%cd%\Version.Check" >nul
+find [%version%] Version.Check >nul
+if not %errorlevel%==0 goto update
+echo You have the latest recommended version.
+pause
+goto menu
 
 
 :export
