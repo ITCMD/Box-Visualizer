@@ -4,6 +4,8 @@ goto StartFile
 :update
 echo Installing Update . . .
 bitsadmin /transfer updatevisualizer /download /priority high https://github.com/ITCMD/Box-Visualizer/raw/master/Visualizer.bat "%~0" >nul
+
+
 echo Completed.
 echo this version: 1.2
 echo Changelog:
