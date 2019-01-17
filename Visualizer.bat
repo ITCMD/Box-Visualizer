@@ -7,7 +7,7 @@ bitsadmin /transfer updatevisualizer /download /priority high https://github.com
 echo Completed.
 echo this version: 1.2
 echo Changelog:
-echo [1] Fixed the updator LOL
+echo [1] fixed this LOL
 pause
 :StartFile
 set _Color=0a
