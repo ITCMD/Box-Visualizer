@@ -7,7 +7,7 @@ bitsadmin /transfer updatevisualizer /download /priority high https://github.com
 echo Completed.
 echo this version: 1.2
 echo Changelog:
-echo [1] - Released
+echo [1]
 pause
 :StartFile
 mode con lines=15 cols=50
@@ -202,7 +202,7 @@ if %errorlevel%==4 goto updator
 cls
 echo Checking for update . . .
 bitsadmin /transfer visualizerupdatecheck /download /priority high https://github.com/ITCMD/Box-Visualizer/raw/master/Visualizer.version "%cd%\Version.Check" >nul
-find [%version%] Version.Check >nul
+find "[%version%]" "Version.Check" >nul
 if not %errorlevel%==0 goto update
 echo You have the latest recommended version.
 pause
