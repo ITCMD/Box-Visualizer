@@ -1,13 +1,13 @@
 @echo off
-set Version=1.1
+set Version=1.2
 goto StartFile
 :update
 echo Installing Update . . .
 bitsadmin /transfer updatevisualizer /download /priority high https://github.com/ITCMD/Box-Visualizer/raw/master/Visualizer.bat "%~0" >nul
 echo Completed.
-echo this version: 1.1
+echo this version: 1.2
 echo Changelog:
-echo [1]
+echo [1] Fixed the updator LOL
 pause
 :StartFile
 set _Color=0a
