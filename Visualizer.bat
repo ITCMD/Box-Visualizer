@@ -7,7 +7,8 @@ bitsadmin /transfer updatevisualizer /download /priority high https://github.com
 echo Completed.
 echo this version: 1.2
 echo Changelog:
-echo [1]
+echo [1] - Released
+pause
 :StartFile
 mode con lines=15 cols=50
 set _Lines=15
