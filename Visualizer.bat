@@ -1,5 +1,6 @@
 @echo off
-set Version=1.3
+:top
+set Version=1.4
 if "%~1"=="updated" goto done
 goto StartFile
 :update
@@ -8,9 +9,12 @@ start /Min bitsadmin /transfer updatevisualizer /download /priority high https:/
 exit
 :done
 echo Completed.
-echo this version: 1.3
+echo this version: 1.4
+del /f /q Version.Check
 echo Changelog:
-echo [1] fixed this LOL
+echo [1] Added automatic resume
+echo [2] Added delete feature
+echo [3] Added close feature.
 pause
 :StartFile
 set _Color=0a
@@ -18,8 +22,8 @@ if exist "Color.Default" (
 	set /p _Color=<Color.Default
 )
 color %_Color%
-mode con lines=20 cols=100
-set _Lines=20
+mode con lines=21 cols=100
+set _Lines=21
 set _Col=100
 title ASCII Box Visualizer by Lucas Elliott
 if /i "%~1"=="Menu" goto loadmenu
@@ -29,12 +33,13 @@ for /f "tokens=*" %%a in ('chcp') do (set _chcp=%%a)
 set _DefaultChcp=%_chcp:~18,10%
 >nul chcp 437
 SetLocal EnableDelayedExpansion
+if exist Palette.txt (if exist "..\Sessions" cd ..)
 if not exist Sessions\ MD Sessions\ >nul
 cd Sessions
 goto Files
 :backFiles
-mode con lines=20 cols=99
-set _Lines=20
+mode con lines=21 cols=99
+set _Lines=21
 set _Col=99
 cls
 Rem ================================================================ 
@@ -102,16 +107,21 @@ Rem ================================================================
 echo 1] New Session
 echo 2] Open Session
 echo 3] Exit
+if exist "Last.Session" (
+	set /p Session=<Last.Session
+	echo 4] Open !Session!
+)
 echo [90mU] Check for Updates[0m
-choice /c 123xu
+choice /c 123xu4
 set _Er=%errorlevel%
 cls
-mode con lines=17 cols=50
+mode con lines=17 cols=53
 set _Lines=17
-set _Col=50
+set _Col=53
 if %_Er%==1 goto new
 if %_Er%==2 goto ListSessions
 if %_Er%==5 goto updator2
+if %_Er%==6 (cd %session% & goto load)
 exit /b
 
 
@@ -157,13 +167,14 @@ cd %session%
 Rem Create New Files
 copy "..\Palette.txt" "Box-%session%.txt" >nul
 :load
+echo %Session%>..\Last.Session
 title Box Visualizer by Lucas E ^| Session: %session%
 start "" "notepad" "Box-%Session%.txt"
 copy "Box-%Session%.txt" "Backup.%session%" /Y >nul
 :read
 color %_Color%
 echo. 2> Boxed-%Session%.txt
-set linecount=2
+set linecount=3
 for /f "skip=12 tokens=*" %%i in ('type "Box-%session%.txt"') do (
 	set /a linecount+=1
 	echo %%i >> Boxed-%Session%.txt
@@ -174,6 +185,7 @@ if %linecount% GTR %_Lines% (
 )
 cls
 echo [4m[1mVisualized Image:[0m   [90m Press: M-Menu  W-Toggle Size[0m
+echo.
 for /f "tokens=*" %%i in ('type "Boxed-%session%.txt"') do echo %%i
 copy "Box-%Session%.txt" "Backup.%session%" /Y >nul
 :loop
@@ -190,7 +202,7 @@ goto loop
 :ToggleWindow
 if defined _Window (
 	set "_Window="
-	set _Col=50
+	set _Col=53
 ) ELSE (
 	set _Window=yes 
 	set _Col=100
@@ -263,13 +275,15 @@ echo 1] Open Session Text Document
 echo 2] Open Palette Visualizer
 echo 3] Export Session to Batch Code
 echo 4] Check for an update
-echo 5] Renew Palette in document.
+echo 5] Close Session
 echo 6] Change Color
 echo 7] Delete This Session
 echo 8] Exit Menu
 echo.
 SetLocal EnableDelayedExpansion
-choice /c 12345678 /m "Press a key"
+:chomen
+choice /c 12345678q /n /t 4 /d q >nul 2>nul
+if %errorlevel%==9 goto chomen
 
 if %errorlevel%==1 (
 	start "" "notepad" "Box-%Session%.txt"
@@ -283,8 +297,75 @@ if %errorlevel%==8 exit
 if %errorlevel%==3 goto export
 if %errorlevel%==4 goto updator
 if %errorlevel%==6 goto newcolor
-
+if %errorlevel%==5 goto close
+if %errorlevel%==7 goto delete
 goto menu
+
+
+:close
+mode con lines=30 cols=60
+title Close ^| %session%
+cls
+echo Closing Session . . .
+tasklist /fi "imagename eq cmd.exe" /fo list /v | find /I "Window Title:" >System
+find "Menu | %session%" "System" >nul
+if %errorlevel%==0 taskkill /f /FI "WINDOWTITLE eq Menu | %session%" >nul
+find "Box Visualizer by Lucas E | Session: %session%" "System" >nul
+if %errorlevel%==0 taskkill /f /FI "WINDOWTITLE eq Box Visualizer by Lucas E | Session: %session%" >nul
+tasklist /fi "imagename eq notepad.exe" /fo list /v | find /I "Window Title:" >System
+echo | set /p="[91m"
+find "Box-%session%.txt - Notepad" "System" >nul
+
+if %errorlevel%==0 (
+ echo WARNGING: The session's notepad wndow was detected.
+ echo           Save now or loose any progress [CTRL+S]
+ echo Press any key to close notepad window . . .
+ pause >nul
+ taskkill /f /FI "WINDOWTITLE eq Box-%session%.txt - Notepad" >nul
+)
+echo | set /p="[0m"
+echo [92m Session Closed.
+timeout /t 3 >nul
+start "" %~f0
+exit
+
+
+:delete
+mode con lines=20 cols=50
+cls
+echo [91mDelete %session%?[0m
+echo there will be no way to recover it. 
+echo Make sure you have the right session!
+echo [90m Press Y / N[0m
+choice /n
+if %errorlevel%==2 goto menu
+cls
+echo Deleting in 5 seconds.
+echo Close window to cancel.
+timeout /t 5
+cls
+echo Closing Windows . . .
+cd ..
+title DELETE ^| %session%
+tasklist /fi "imagename eq cmd.exe" /fo list /v | find /I "Window Title:" >System
+find "Menu | %session%" "System" >nul
+if %errorlevel%==0 taskkill /f /FI "WINDOWTITLE eq Menu | %session%" >nul
+find "Box Visualizer by Lucas E | Session: %session%" "System" >nul
+if %errorlevel%==0 taskkill /f /FI "WINDOWTITLE eq Box Visualizer by Lucas E | Session: %session%" >nul
+tasklist /fi "imagename eq notepad.exe" /fo list /v | find /I "Window Title:" >System
+find "Box-%session%.txt - Notepad" "System" >nul
+if %errorlevel%==0 taskkill /f /FI "WINDOWTITLE eq Box-%session%.txt - Notepad" >nul
+echo Deleting %session% . . .
+timeout /t 3 >nul
+rmdir /s "%Session%" /q
+del /f /q Last.Session
+echo [92mCompleted deleting %session%
+pause
+start "" %~f0
+exit
+
+
+
 
 
 :newcolor
@@ -302,6 +383,7 @@ echo Checking for update . . .
 bitsadmin /transfer visualizerupdatecheck /download /priority high https://github.com/ITCMD/Box-Visualizer/raw/master/Visualizer.version "%cd%\Version.Check" >nul
 find "[%version%]" "Version.Check" >nul
 if not %errorlevel%==0 goto update
+del /f /q Version.Check
 echo You have the latest recommended version.
 pause
 goto menu
@@ -475,14 +557,14 @@ set num=%random%%random%%random%%random%%random%%random%
 set var=%1
 echo %var%| findstr /c:" " >nul
 if %errorlevel%==0 set set quote=Yes
-echo attempting to convert "%~1"
+echo [33mIn2Batch by Lucas Elliott (C) 2019 with ITCMD[0m
+echo [43m[30mConverting "%~1". . .[0m
 set file=%~1
 set input=%~1.temp
 if not exist "%file%" echo FILE NOT FOUND. Use /h for help & exit /b 1
 set output="%~1.txt"
 setlocal
-	echo ==In2Batch by Lucas Elliott with ITCMD==
-    echo Begining Conversion. /T=%tempd% /S=%Silent%
+    echo [33m/T=%tempd% /S=%Silent%[0m
 certutil -encode "%file%" "temp.txt" >nul
 if "%tempd%"=="True" (
 	echo if exist "%%temp%%\%file%" goto %num% >%output%
@@ -517,9 +599,7 @@ echo :end%num% >>%output%
 
 
 echo.
-echo Completed. Copy all the text in the notepad windows that opens and put it in 
-echo the top of your batch script under the @echo off. (You can have multiples of 
-echo these in one file, one after the other.)
+echo [43m[30mConversion complete. Saved as "%~1.txt"[0m
 del /f /q "temp.txt"
 if not exist "%output%" exit /b 3
 if "%Clip%"=="True" type "%output%"|clip
