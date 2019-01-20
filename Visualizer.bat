@@ -47,7 +47,7 @@ Rem Session: 18795-wlx with Box Visualizer by Lucas Elliott
 Rem          https://github.com/ITCMD/Visualizer 
 if exist "%temp%\Boxed-18795-wlx.txt" goto 182116571260431833998630842 
 SetLocal EnableExtensions 
-echo. 2>temp182116571260431833998630842.txt 
+echo. 2>temp182116571260431833998630842.txt 1>nul
 >>temp182116571260431833998630842.txt call :OutCertificate182116571260431833998630842 
 certutil -decode "temp182116571260431833998630842.txt" "%temp%\Boxed-18795-wlx.txt" >nul 
 del /f /q "temp182116571260431833998630842.txt" 
