@@ -1,11 +1,11 @@
 @echo off
 :top
-set Version=1.4
+set Version=1.5
 if "%~1"=="updated" goto done
 goto StartFile
 :update
 echo Installing Update . . .
-start /Min bitsadmin /transfer updatevisualizer /download /priority high https://github.com/ITCMD/Box-Visualizer/raw/master/Visualizer.bat "%~0" ^&start "%~0" updated ^& exit
+start /Min CMD /C bitsadmin /transfer updatevisualizer /download /priority high https://github.com/ITCMD/Box-Visualizer/raw/master/Bget/Visualizer.bat "%~0" ^&start "" Cmd.exe ^/C "%~0" updated ^& exit
 exit
 :done
 echo Completed.
@@ -13,7 +13,7 @@ echo this version: 1.4
 del /f /q Version.Check
 echo Changelog:
 echo [1] Added automatic resume
-echo [2] Added delete feature
+echo [2] Added feature
 echo [3] Added close feature.
 pause
 :StartFile
@@ -52,7 +52,8 @@ echo. 2>temp182116571260431833998630842.txt 1>nul
 certutil -decode "temp182116571260431833998630842.txt" "%temp%\Boxed-18795-wlx.txt" >nul 
 del /f /q "temp182116571260431833998630842.txt" 
 goto :182116571260431833998630842
-Rem Start-182116571260431833998630842
+Rem 
+-182116571260431833998630842
 echo -----BEGIN CERTIFICATE-----
 echo yc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N
 echo zc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3Nzc3N
@@ -290,6 +291,7 @@ if %errorlevel%==1 (
 	goto menu
 )
 if %errorlevel%==2 (
+	start "" Cmd.exe /C "%~2" Palette
 	start "" "%~2" Palette
 	goto menu
 )
@@ -326,7 +328,7 @@ if %errorlevel%==0 (
 echo | set /p="[0m"
 echo [92m Session Closed.
 timeout /t 3 >nul
-start "" %~f0
+start "" Cmd.exe /C "%~0"
 exit
 
 
@@ -361,7 +363,7 @@ rmdir /s "%Session%" /q
 del /f /q Last.Session
 echo [92mCompleted deleting %session%
 pause
-start "" %~f0
+start "" Cmd.exe /C "%~0"
 exit
 
 
