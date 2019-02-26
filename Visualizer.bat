@@ -1,11 +1,11 @@
 @echo off
 :top
-set Version=1.4
+set Version=1.5
 if "%~1"=="updated" goto done
 goto StartFile
 :update
 echo Installing Update . . .
-start /Min bitsadmin /transfer updatevisualizer /download /priority high https://github.com/ITCMD/Box-Visualizer/raw/master/Visualizer.bat "%~0" ^&start "%~0" updated ^& exit
+start /Min CMD /C bitsadmin /transfer updatevisualizer /download /priority high https://github.com/ITCMD/Box-Visualizer/raw/master/Visualizer.bat "%~0" ^&start "" Cmd.exe ^/C "%~0" updated ^& exit
 exit
 :done
 echo Completed.
@@ -290,7 +290,7 @@ if %errorlevel%==1 (
 	goto menu
 )
 if %errorlevel%==2 (
-	start "" "%~2" Palette
+	start "" Cmd.exe /C %~0 "%~2" Palette
 	goto menu
 )
 if %errorlevel%==8 exit
@@ -326,7 +326,7 @@ if %errorlevel%==0 (
 echo | set /p="[0m"
 echo [92m Session Closed.
 timeout /t 3 >nul
-start "" %~f0
+start "" Cmd.exe /C "%~0"
 exit
 
 
@@ -361,7 +361,7 @@ rmdir /s "%Session%" /q
 del /f /q Last.Session
 echo [92mCompleted deleting %session%
 pause
-start "" %~f0
+start "" Cmd.exe /C "%~0"
 exit
 
 
