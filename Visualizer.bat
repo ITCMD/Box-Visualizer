@@ -290,7 +290,7 @@ if %errorlevel%==1 (
 	goto menu
 )
 if %errorlevel%==2 (
-	start "" Cmd.exe /C %~0 "%~2" Palette
+	start "" Cmd.exe /C "%~2" Palette
 	goto menu
 )
 if %errorlevel%==8 exit
