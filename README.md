@@ -9,9 +9,9 @@ Code output will run on Windows 7 and 10 on any machine.
 - Once you are done you can open the menu (by going to the command prompt window and pressing M) and choose "Export".
 - This will create a batch script you can put inside your batch program, which will display whatever you created. It will not change how your script runs and you do not have to change encoding. <br> <br>
  
-###### *Startup Menu* The menu logo was created with this tool!
+###### *Startup Menu* <br> The menu logo was created with this tool!
 ![image](http://i.imgur.com/9WvaBoR.png)
-###### *Session Example* Each Session has a unique alpha-numeric number.
+###### *Session Example* <br> Each Session has a unique alpha-numeric number.
 ![image](http://www.joelnelsongroup.com/wp-content/uploads/2015/08/Coming-Soon.jpg)
 ###### *Session Menu* <br> Renaming sessions is coming soon.
 ![image](http://www.joelnelsongroup.com/wp-content/uploads/2015/08/Coming-Soon.jpg)
