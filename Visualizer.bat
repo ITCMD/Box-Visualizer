@@ -5,16 +5,18 @@ if "%~1"=="updated" goto done
 goto StartFile
 :update
 echo Installing Update . . .
+echo Window will close for update.
+timeout /t 3 >nul
 start /Min CMD /C bitsadmin /transfer updatevisualizer /download /priority high https://github.com/ITCMD/Box-Visualizer/raw/master/Visualizer.bat "%~0" ^&start "" Cmd.exe ^/C "%~0" updated ^& exit
 exit
 :done
 echo Completed.
-echo this version: 1.4
+echo this version: 1.5
 del /f /q Version.Check
 echo Changelog:
 echo [1] Added automatic resume
 echo [2] Added delete feature
-echo [3] Added close feature.
+echo [3] Fixed Errors
 pause
 :StartFile
 set _Color=0a
