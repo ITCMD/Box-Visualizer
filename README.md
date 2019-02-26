@@ -22,3 +22,5 @@ Code output will run on Windows 7 and 10 on any machine.
 Note that this code is under copyright. Usage of it without acknowledgment is illegal.
 This script uses the In2Batch batch script: https://github.com/ITCMD/In2Batch
 as well as extracts from the CMDS script: https://github.com/ITCMD/CMDS
+
+The Bget version does not use any 3rd party EXEs but the output script is slower.
