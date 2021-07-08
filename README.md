@@ -1,4 +1,6 @@
 # Box-Visualizer
+*Im looking at this in 2021, and I realize I spelled my name wrong in the menu. I also see that some of the images were deleted. Thats a bummer. Maybe Ill fix it some day*
+
 Create Box-menus using unicode for your batch file. (Results are 100% compatible)
 Program runs on windows 10+
 Code output will run on Windows 7 and 10 on any machine.
